@@ -124,10 +124,10 @@ inline CvScalar vRandomColor()
 #define vColorFul(gray, clr) cv::cvtColor(gray, clr , CV_GRAY2BGR) 
 #define vThresh(gray, thresh) cv::threshold( gray, gray, thresh, 255, CV_THRESH_BINARY )//if > thresh -> white
 #define vThreshInv(gray, thresh) cv::threshold( gray, gray, thresh, 255, CV_THRESH_BINARY_INV )//if < thresh -> white
-#define vOpen(img, times) cv::morphologyEx( img, img, NULL, NULL, CV_MOP_OPEN, times );//去除白色小区域
-#define vClose(img, times) cv::morphologyEx( img, img, NULL, NULL, CV_MOP_CLOSE, times );//去除黑色小区域
-#define vDilate(img, times) cv::morphologyEx( img, img, NULL, NULL, CV_MOP_DILATE, times );
-#define vErode(img, times) cv::morphologyEx( img, img, NULL, NULL, CV_MOP_ERODE, times );
+#define vOpen(img, times) cv::morphologyEx( img, img, CV_MOP_OPEN, NULL, Point(-1,-1), times );//去除白色小区域
+#define vClose(img, times) cv::morphologyEx( img, img, CV_MOP_CLOSE, NULL, Point(-1,-1), times );//去除黑色小区域
+#define vDilate(img, times) cv::morphologyEx( img, img, CV_MOP_DILATE, NULL, Point(-1,-1), times );
+#define vErode(img, times) cv::morphologyEx( img, img, CV_MOP_ERODE, NULL, Point(-1,-1), times );
 
 #define vFullScreen(win_name) cvSetWindowProperty(win_name, CV_WND_PROP_FULLSCREEN, 1);
 
