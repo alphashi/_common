@@ -5,8 +5,8 @@
 #ifdef WIN32
 #ifdef _DEBUG
 #pragma comment(lib,"opencv_core"OPENCV_VERSION"d.lib")
-#pragma comment(lib,"opencv_imgproc"OPENCV_VERSION".lib")
-#pragma comment(lib,"opencv_highgui"OPENCV_VERSION".lib")
+#pragma comment(lib,"opencv_imgproc"OPENCV_VERSION"d.lib")
+#pragma comment(lib,"opencv_highgui"OPENCV_VERSION"d.lib")
 #else	//_DEBUG
 #pragma comment(lib,"opencv_core"OPENCV_VERSION".lib")
 #pragma comment(lib,"opencv_imgproc"OPENCV_VERSION".lib")
@@ -14,9 +14,6 @@
 #endif	//_DEBUG
 #endif	//WIN32
 
-#ifdef KINECT 
-#include "../clnui/ofxKinectCLNUI.h"
-#endif	//KINECT
 #ifdef VIDEOINPUT_LIB 
 #include "../videoInput/videoInput.h"
 #endif	//WIN32
@@ -193,24 +190,6 @@ bool VideoInput::init(int cam_idx)
 bool VideoInput::init(const std::string& file_name)
 {
 	bool loaded = false;
-#ifdef KINECT
-	if (file_name == "kinect")
-	{
-		bool b = init_kinect();
-		if (b)
-		{
-			_InputType = From_Kinect;
-			loaded = true;
-			printf("Reading from kinect.\n");
-		}
-		else
-		{
-			printf("Failed to open Kinect.\n"
-				"You can download the driver from http://codelaboratories.com/get/nui/\n\n");
-			return false;
-		}
-	}
-#endif
 	if (!loaded)
 	{
 		_frame = imread(file_name);
@@ -284,15 +263,6 @@ Mat VideoInput::get_frame()
 {
 	do 
 	{
-#ifdef KINECT
-		if (_kinect)
-		{
-			bool b = _kinect->getDepthBW();
-			_frame = _kinect->bwImage;
-			_frame_num ++;
-			break;
-		}
-#endif
 #ifdef VIDEOINPUT_LIB
 		if (VI)
 		{
@@ -351,14 +321,6 @@ void VideoInput::_post_init()
 
 	printf("Size: <%d,%d>\n",  _size.width, _size.height);
 }
-
-#ifdef KINECT
-bool VideoInput::init_kinect()
-{
-	_kinect = new ofxKinectCLNUI;
-	return _kinect->initKinect(640, 480, 0, 0);
-}
-#endif
 
 void vHighPass(const cv::Mat& src, cv::Mat& dst, int blurLevel/* = 10*/, int noiseLevel/* = 3*/)
 {

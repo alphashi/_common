@@ -20,9 +20,6 @@
 #ifdef VIDEOINPUT_LIB
 class videoInput;
 #endif
-#ifdef KINECT
-class ofxKinectCLNUI; 
-#endif
 
 using std::vector;
 
@@ -144,9 +141,6 @@ struct VideoInput
 		From_Image = 0,
 		From_Video,
 		From_Camera,
-#ifdef KINECT
-		From_Kinect,
-#endif
 		From_Count,
 	}_InputType;
 
@@ -179,10 +173,6 @@ struct VideoInput
 	cv::Mat get_frame();
 private:
 
-#ifdef KINECT
-	cv::Ptr<ofxKinectCLNUI> _kinect;
-	bool init_kinect();
-#endif
 #ifdef VIDEOINPUT_LIB
 	cv::Ptr<videoInput> VI;
 #endif
