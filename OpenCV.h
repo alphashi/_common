@@ -17,10 +17,6 @@
 
 #include "point2d.h"
 
-#ifdef VIDEOINPUT_LIB
-class videoInput;
-#endif
-
 using std::vector;
 
 // enum T_VideoCodec
@@ -173,12 +169,8 @@ struct VideoInput
 	cv::Mat get_frame();
 private:
 
-#ifdef VIDEOINPUT_LIB
-	cv::Ptr<videoInput> VI;
-#endif
 	void _post_init();
 	char buffer[256];
-
 };
 
 

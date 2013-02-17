@@ -14,10 +14,6 @@
 #endif	//_DEBUG
 #endif	//WIN32
 
-#ifdef VIDEOINPUT_LIB 
-#include "../videoInput/videoInput.h"
-#endif	//WIN32
-
 using namespace cv;
 
 #include <set>
@@ -128,10 +124,7 @@ VideoInput::VideoInput()
 
 void VideoInput::showSettingsDialog()
 {
-#if VIDEOINPUT_LIB
-	if (VI)
-		VI->showSettingsWindow(device_id);
-#endif
+
 }
 
 bool VideoInput::init(int cam_idx)
@@ -140,17 +133,6 @@ bool VideoInput::init(int cam_idx)
 	device_id = cam_idx;
 	do 
 	{
-#ifdef VIDEOINPUT_LIB
-		//try direct show directly (VideoInput)
-		VI = new videoInput();
-		VI->setVerbose(false);
-		if (VI)
-		{
-	//		int numDevices = VI->listDevices();
-			if (opened = VI->setupDevice(cam_idx))
-				break;
-		}	
-#endif	//WIN32
 		_capture.open(CV_CAP_DSHOW+cam_idx); 
 		if (_capture.isOpened())
 		{
@@ -240,15 +222,6 @@ void VideoInput::resize( int w, int h )
 		_post_init();
 		return;
 	}
-
-#ifdef VIDEOINPUT_LIB
-	if( w != VI->getWidth(device_id) || h != VI->getHeight(device_id) )
-	{
-		VI->stopDevice(device_id);
-		VI->setupDevice(device_id, w, h);
-		_post_init();
-	}
-#endif // WIN32
 }
 
 void VideoInput::wait(int t)
@@ -263,13 +236,6 @@ Mat VideoInput::get_frame()
 {
 	do 
 	{
-#ifdef VIDEOINPUT_LIB
-		if (VI)
-		{
-			VI->getPixels( device_id, _frame.ptr(), false, true );
-			break;;
-		}
-#endif
 		if (_capture.isOpened())
 		{
 			_capture >> _frame;
@@ -288,13 +254,6 @@ Mat VideoInput::get_frame()
 
 void VideoInput::_post_init()
 {
-#ifdef VIDEOINPUT_LIB
-	if (VI)
-	{
-		int w = VI->getWidth(device_id), h = VI->getHeight(device_id);
-		_frame.create( Size(w,h), CV_8UC3);
-	}
-#endif
 	_frame = get_frame();
 
 	if (_InputType == From_Video)
