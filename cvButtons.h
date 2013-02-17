@@ -4,8 +4,6 @@
 #include <opencv/cv.h>
 #include <vector>
 
-using std::vector;
-
 /**
 	Global OpenCV mouse button callback.
     Must be set with cvSetMouseCallback(..) to make buttons work.
@@ -113,7 +111,7 @@ private:
     /**
         The list of all buttons in this class
     */
-	vector<PushButton> buttonList;
+    std::vector<PushButton> buttonList;
 
     /**
         The last event (mouse state)

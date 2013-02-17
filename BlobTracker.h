@@ -31,25 +31,25 @@
 // poly1_hull0	If set, approximate connected component by (DEFAULT) polygon, or else convex hull (false)
 // areaScale 	Area = image (width*height)*areaScale.  If contour area < this, delete that contour (DEFAULT: 0.1)
 //
-void vFindBlobs(cv::Mat& src, vector<vBlob>& blobs, int minArea = 1, int maxArea = 3072000, bool convexHull=false, bool (*sort_func)(const vBlob& a, const vBlob& b)  = NULL);
-void vFindBlobs(IplImage *src, vector<vBlob>& blobs, int minArea = 1, int maxArea = 3072000, bool convexHull=false, bool (*sort_func)(const vBlob& a, const vBlob& b)  = NULL);
+void vFindBlobs(cv::Mat& src, std::vector<vBlob>& blobs, int minArea = 1, int maxArea = 3072000, bool convexHull=false, bool (*sort_func)(const vBlob& a, const vBlob& b)  = NULL);
+void vFindBlobs(IplImage *src, std::vector<vBlob>& blobs, int minArea = 1, int maxArea = 3072000, bool convexHull=false, bool (*sort_func)(const vBlob& a, const vBlob& b)  = NULL);
 
 void vFindBlobs(IplImage *mask,	int minArea = 1, int maxArea = 3072000, bool convexHull=false);//draw trackedBlobs only
 
-void vFindBlobs(IplImage *src, vector<vBlob>& blobs, vector<vector<vDefect>>& defects, int minArea=1, int maxArea=3072000);
+void vFindBlobs(IplImage *src, std::vector<vBlob>& blobs, std::vector<std::vector<vDefect>>& defects, int minArea=1, int maxArea=3072000);
 
 
 // parameters:
 //  silh - input video frame
 //  dst - resultant motion picture
 //  args - optional parameters
-vector<vBlob>  vUpdateMhi( IplImage* silh, IplImage* dst);
+std::vector<vBlob>  vUpdateMhi( IplImage* silh, IplImage* dst);
 
 class vBlobTracker
 {
 public:
 	vBlobTracker();
-	void trackBlobs(const vector<vBlob>& newBlobs);
+	void trackBlobs(const std::vector<vBlob>& newBlobs);
 
 	std::vector<vTrackedBlob>	trackedBlobs; //tracked blobs
 	std::vector<vTrackedBlob>  deadBlobs;
@@ -75,16 +75,16 @@ struct vFingerDetector
 
 	int handspos[2];
 
-	vector<cv::Point2f>		ppico;
-	vector<cv::Point2f>		smppico;
+	std::vector<cv::Point2f>		ppico;
+	std::vector<cv::Point2f>		smppico;
 
-	vector<float>				kpointcurv;
-	vector<float>				smkpointcurv;
+	std::vector<float>				kpointcurv;
+	std::vector<float>				smkpointcurv;
 
-	vector<bool>				bfingerRuns;
+	std::vector<bool>				bfingerRuns;
 
-	vector<cv::Point2f>		lhand;
-	vector<cv::Point2f>		rhand;
+	std::vector<cv::Point2f>		lhand;
+	std::vector<cv::Point2f>		rhand;
 
 //	cv::Vec2f	v1,v2,aux1;
 
@@ -96,7 +96,7 @@ struct vFingerDetector
 
 struct vHaarFinder
 {
-	vector<vBlob> blobs;
+	std::vector<vBlob> blobs;
 	float scale;
 	//
 	bool init(char* cascade_name);
@@ -133,6 +133,7 @@ struct vOpticalFlowLK
 		int block_size;
 };
 
+//todo:
 struct IBackGround
 {
 	virtual void init(cv::Mat initial, void* param = NULL) = 0;
@@ -140,8 +141,8 @@ struct IBackGround
 	virtual void update(cv::Mat image, int mode = 0) = 0;
 
 	virtual void setIntParam(int idx, int value){}
-	virtual cv::Mat& getForeground() = 0;
-	virtual cv::Mat& getBackground() = 0;
+	virtual cv::Mat getForeground() = 0;
+	virtual cv::Mat getBackground() = 0;
 
 	virtual ~IBackGround(){}
 };
@@ -161,9 +162,9 @@ struct IAutoBackGround : IBackGround
 
 	virtual void update(cv::Mat image, int mode = 0);
 
-	cv::Mat& getForeground();
+	cv::Mat getForeground();
 
-	cv::Mat& getBackground();
+	cv::Mat getBackground();
 
 	virtual ~IAutoBackGround();
 };
@@ -190,8 +191,8 @@ struct IStaticBackground : IBackGround
 
 	virtual ~IStaticBackground();
 	virtual void setIntParam(int idx, int value);
-	cv::Mat& getForeground();
-	cv::Mat& getBackground();
+	cv::Mat getForeground();
+	cv::Mat getBackground();
 };
 
 #define DETECT_BOTH 0
@@ -225,6 +226,6 @@ struct vThreeFrameDiff: public IStaticBackground
 
 	void update(cv::Mat image, int mode = 0);
 
-	cv::Mat& getForeground();
-	cv::Mat& getBackground();
+	cv::Mat getForeground();
+	cv::Mat getBackground();
 };

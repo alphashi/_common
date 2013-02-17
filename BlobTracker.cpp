@@ -62,7 +62,7 @@ void vFindBlobs(IplImage *src, vector<vBlob>& blobs, int minArea, int maxArea, b
 				if(convexHull) //Convex Hull of the segmentation
 					approx = cvConvexHull2(c,mem_storage,CV_CLOCKWISE,1);
 				else //Polygonal approximation of the segmentation
-					approx = cvApproxPoly(c,sizeof(CvContour),mem_storage,CV_POLY_APPROX_DP, std::min(length*0.003,2.0));
+					approx = cvApproxPoly(c,sizeof(CvContour),mem_storage,CV_POLY_APPROX_DP, std::min<double>(length*0.003,2.0));
 
 				area = cvContourArea( approx ); //update area
 				cvMoments( approx, &myMoments );
@@ -950,12 +950,12 @@ void vThreeFrameDiff::update(cv::Mat image, int mode/* = 0*/)
 	//vThresh(grayDiff, thresh);
 }
 
-cv::Mat& vThreeFrameDiff::getForeground()
+cv::Mat vThreeFrameDiff::getForeground()
 {
 	return grayDiff;
 }
 
-cv::Mat& vThreeFrameDiff::getBackground()
+cv::Mat vThreeFrameDiff::getBackground()
 {
 	return grayDiff;
 }
@@ -972,12 +972,12 @@ void IStaticBackground::setIntParam( int idx, int value )
 	threshes[idx] =	255-value;
 }
 
-cv::Mat& IStaticBackground::getForeground()
+cv::Mat IStaticBackground::getForeground()
 {
 	return fore;
 }
 
-cv::Mat& IStaticBackground::getBackground()
+cv::Mat IStaticBackground::getBackground()
 {
 	return bg;
 }
@@ -992,12 +992,12 @@ void IAutoBackGround::update( cv::Mat image, int mode /*= 0*/ )
 	cvUpdateBGStatModel(&(IplImage)image, bg_model );
 }
 
-cv::Mat& IAutoBackGround::getForeground()
+cv::Mat IAutoBackGround::getForeground()
 {
 	return cv::Mat(bg_model->foreground);
 }
 
-cv::Mat& IAutoBackGround::getBackground()
+cv::Mat IAutoBackGround::getBackground()
 {
 	return cv::Mat(bg_model->background);
 }

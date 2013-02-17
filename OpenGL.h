@@ -1,21 +1,14 @@
 #ifndef _GL_HELPER_
 #define _GL_HELPER_
 
+#ifdef WIN32
+#include <windows.h>
+#endif
 #include <gl/GL.h>
 #include <opencv2/core/opengl_interop.hpp>
 #include <string>
 
-using std::string;
-
 #pragma comment(lib,"opengl32.lib")
-
-#ifdef _DEBUG
-#pragma comment(lib,"opencv_core232d.lib")
-#pragma comment(lib,"opencv_highgui232d.lib")
-#else
-#pragma comment(lib,"opencv_core232.lib")
-#pragma comment(lib,"opencv_highgui232.lib")
-#endif
 
 namespace cv
 {
@@ -27,7 +20,7 @@ public:
 	float _far;
 	float _fov;
 
-	I3DRenderer(const string& title, int w=800,int h = 600):_window_name(title)
+    I3DRenderer(const std::string& title, int w=800,int h = 600):_window_name(title)
 	{ 
 		namedWindow(title, WINDOW_OPENGL);
 		resizeWindow(title, w, h);
@@ -114,10 +107,10 @@ private:
 		}
 	}
 protected:
-	GlCamera _camera;
-	string _window_name;
-	int _mouse_dx;
-	int _mouse_dy;
+	GlCamera    _camera;
+	std::string _window_name;
+	int         _mouse_dx;
+	int         _mouse_dy;
 };
 }
 #endif

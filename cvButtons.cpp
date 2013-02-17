@@ -11,7 +11,7 @@ void cvButtonsOnMouse( int e, int x, int y, int f, void* param ){
 #define C2 cvScalar(0,0,0)
 
 void CvButtons::paintButtons(IplImage *img){
-	vector<PushButton>::iterator it = buttonList.begin();
+    std::vector<PushButton>::iterator it = buttonList.begin();
 	while (it != buttonList.end()) {
 		
 		// Grab button variables:
@@ -22,7 +22,7 @@ void CvButtons::paintButtons(IplImage *img){
 		int x2 = x+w;
 		int y2 = y+h;
 		
-		// Highlight mouseover position:
+		// Highlight mouse over position:
 		if( mx >= x && mx <= x2 && my >= y && my <= y2 ){
 			cvRectangle( img, cvPoint(x-4,y-4), cvPoint(x2+4,y2+4), C2, 1,CV_AA );
 			

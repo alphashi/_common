@@ -15,6 +15,7 @@
 #endif	//WIN32
 
 using namespace cv;
+using std::vector;
 
 #include <set>
 

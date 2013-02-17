@@ -64,7 +64,7 @@ struct vBlob
 	float angle;
 
 	Point2f center;
-	vector<Point> pts;
+	std::vector<Point> pts;
 	float area;
 	float length;
 	bool isHole;
@@ -82,10 +82,10 @@ struct vBlob
 
 	void boxMerge(const vBlob& other)
 	{
-		int _x = cv::min(other.box.x, box.x);
-		int _y = cv::min(other.box.y, box.y);
-		box.width = cv::max(other.box.x + other.box.width, box.x + box.width)- _x;
-		box.height = cv::max(other.box.y + other.box.height, box.y + box.height) - _y;
+		int _x = cv::min<int>(other.box.x, box.x);
+		int _y = cv::min<int>(other.box.y, box.y);
+		box.width = cv::max<int>(other.box.x + other.box.width, box.x + box.width)- _x;
+		box.height = cv::max<int>(other.box.y + other.box.height, box.y + box.height) - _y;
 
 		box.x = _x;
 		box.y = _y;

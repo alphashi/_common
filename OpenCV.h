@@ -16,8 +16,7 @@
 #include <vector>
 
 #include "point2d.h"
-
-using std::vector;
+#include "OpenGL.h"
 
 // enum T_VideoCodec
 // {
@@ -78,7 +77,7 @@ void vFastCopyImageTo(const cv::Mat& src, cv::Mat& dst, const cv::Rect& roi);
 void vCopyImageTo(const cv::Mat& src, cv::Mat& dst, const cv::Rect& roi);
 void vFlip(cv::Mat& src, int flipX, int flipY);
 void vDrawText(cv::Mat& img, int x,int y,char* str, CvScalar clr=CV_RGB(255,255,255));
-void vPolyLine(cv::Mat& dst, vector<cv::Point>& pts, CvScalar clr=CV_RGB(255,255,255), int thick = 1);
+void vPolyLine(cv::Mat& dst, std::vector<cv::Point>& pts, CvScalar clr=CV_RGB(255,255,255), int thick = 1);
 CvScalar vDefaultColor(int idx);
 
 #define show_image(img_name) do{\
@@ -186,9 +185,9 @@ void vGetPerspectiveMatrix(CvMat*& warp_matrix, cv::Point2f xsrcQuad[4], cv::Poi
  
 void cvSkinSegment(IplImage* img, IplImage* mask);
 
-void vFillPoly(IplImage* img, const vector<cv::Point>& pt_list, const cv::Scalar& clr = cv::Scalar(255,255,255));
-void vLinePoly(IplImage* img, const vector<cv::Point>& pt_list, const cv::Scalar& clr = cv::Scalar(255,255,255), int thick = 1);
-void vLinePoly(IplImage* img, const vector<cv::Point2f>& pt_list, const cv::Scalar& clr = cv::Scalar(255,255,255), int thick = 1);
+void vFillPoly(IplImage* img, const std::vector<cv::Point>& pt_list, const cv::Scalar& clr = cv::Scalar(255,255,255));
+void vLinePoly(IplImage* img, const std::vector<cv::Point>& pt_list, const cv::Scalar& clr = cv::Scalar(255,255,255), int thick = 1);
+void vLinePoly(IplImage* img, const std::vector<cv::Point2f>& pt_list, const cv::Scalar& clr = cv::Scalar(255,255,255), int thick = 1);
 
 inline bool isPointInsideRect(int x, int y, const cv::Rect& rect)
 {
