@@ -75,7 +75,7 @@ imgA[i][j].r = 111;
 */
 void vFastCopyImageTo(const cv::Mat& src, cv::Mat& dst, const cv::Rect& roi);
 void vCopyImageTo(const cv::Mat& src, cv::Mat& dst, const cv::Rect& roi);
-void vFlip(cv::Mat& src, int flipX, int flipY);
+void vFlip(cv::Mat& src, int flipHorizontal, int flipVertical);
 void vDrawText(cv::Mat& img, int x,int y,char* str, CvScalar clr=CV_RGB(255,255,255));
 void vPolyLine(cv::Mat& dst, std::vector<cv::Point>& pts, CvScalar clr=CV_RGB(255,255,255), int thick = 1);
 CvScalar vDefaultColor(int idx);

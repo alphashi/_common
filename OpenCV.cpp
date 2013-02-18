@@ -34,20 +34,29 @@ void vRotateImage(IplImage* image, float angle, float centreX, float centreY){
 #define NO_FLIP 1000
 /*
 flip_param -> flip_mode
-0 -> NO_FLIP
-1 -> 0	:	horizontal
-2 -> 1	:	vertical
-3 -> -1	:	both
+NO_FLIP
+0	:	horizontal
+1	:	vertical
+-1	:	both
 */
-void vFlip(Mat& src, int flipX, int flipY)
+void vFlip(Mat& src, int flipHorizontal, int flipVertical)
 {
-	assert (flipX == 0 ||flipX == 1);
-	assert (flipY == 0 ||flipY == 1);
-	static int mapper[2][2] = {{NO_FLIP,0},{1,-1}};
-	int code = mapper[flipY][flipX];
+	int flipCode = NO_FLIP;
 
-	if (code != NO_FLIP)
-		flip(src, src, code);
+    if (flipVertical == 1)
+    {
+        if (flipHorizontal == 1)
+            flipCode = 0;
+        else
+            flipCode = -1;
+    }
+    else if (flipHorizontal == 1)
+    {
+        flipCode = 1;    
+    }
+
+	if (flipCode != NO_FLIP)
+		flip(src, src, flipCode);
 }
 
 void vFastCopyImageTo( const cv::Mat& src, cv::Mat& dst, const cv::Rect& roi )
