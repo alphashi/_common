@@ -18,6 +18,9 @@
 #include "point2d.h"
 #include "OpenGL.h"
 
+#define OPENCV_VERSION CVAUX_STR(CV_MAJOR_VERSION)""CVAUX_STR(CV_MINOR_VERSION)""CVAUX_STR(CV_SUBMINOR_VERSION)
+// 210/231/243
+
 // enum T_VideoCodec
 // {
 // 	T_MPEG = CV_FOURCC('P','I','M','1'),		//	= MPEG-1 codec

@@ -11,12 +11,14 @@
 #pragma comment(lib,"opencv_features2d"OPENCV_VERSION"d.lib")
 #pragma comment(lib,"opencv_legacy"OPENCV_VERSION"d.lib")
 #pragma comment(lib,"opencv_core"OPENCV_VERSION"d.lib")
+#pragma comment(lib,"opencv_flann"OPENCV_VERSION"d.lib")
 #else
 #pragma comment(lib,"opencv_video"OPENCV_VERSION".lib")
 #pragma comment(lib,"opencv_objdetect"OPENCV_VERSION".lib")
 #pragma comment(lib,"opencv_features2d"OPENCV_VERSION".lib")
 #pragma comment(lib,"opencv_legacy"OPENCV_VERSION".lib")
 #pragma comment(lib,"opencv_core"OPENCV_VERSION".lib")
+#pragma comment(lib,"opencv_flann"OPENCV_VERSION".lib")
 #endif
 
 using namespace cv;

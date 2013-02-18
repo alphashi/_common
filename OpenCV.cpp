@@ -1,7 +1,5 @@
 #include "OpenCV.h"
 
-#define OPENCV_VERSION CVAUX_STR(CV_MAJOR_VERSION)""CVAUX_STR(CV_MINOR_VERSION)""CVAUX_STR(CV_SUBMINOR_VERSION)
-
 #ifdef WIN32
 #ifdef _DEBUG
 #pragma comment(lib,"opencv_core"OPENCV_VERSION"d.lib")
