@@ -74,7 +74,9 @@ VOID NUIAPI NuiShutdown(
 #define FACILITY_NUI 0x301
 #define S_NUI_INITIALIZING                      MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_NUI, 1)                                             // 0x03010001
 #define E_NUI_FRAME_NO_DATA                     MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NUI, 1)
+#if 0
 static_assert(E_NUI_FRAME_NO_DATA == 0x83010001, "Error code has changed.");
+#endif
 #define E_NUI_STREAM_NOT_ENABLED                MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NUI, 2)
 #define E_NUI_IMAGE_STREAM_IN_USE               MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NUI, 3)
 #define E_NUI_FRAME_LIMIT_EXCEEDED              MAKE_HRESULT(SEVERITY_ERROR, FACILITY_NUI, 4)
@@ -106,13 +108,13 @@ static_assert(E_NUI_FRAME_NO_DATA == 0x83010001, "Error code has changed.");
 #endif
 
 #ifndef __No__NuiSensor_h__
-#include <NuiSensor.h>
+#include "NuiSensor.h"
 #endif __No__NuiSensor_h__
 
-#include <NuiImageCamera.h>
+#include "NuiImageCamera.h"
 
 #ifndef __No__NuiSkeleton_h__
-#include <NuiSkeleton.h>
+#include "NuiSkeleton.h"
 #endif __No__NuiSkeleton_h__
 
 #include <poppack.h>

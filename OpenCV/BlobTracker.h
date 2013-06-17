@@ -35,7 +35,7 @@ void vFindBlobs(cv::Mat& src, std::vector<vBlob>& blobs, int minArea = 1, int ma
 void vFindBlobs(IplImage *src, std::vector<vBlob>& blobs, int minArea = 1, int maxArea = 3072000, bool convexHull=false, bool (*sort_func)(const vBlob& a, const vBlob& b)  = NULL);
 
 void vFindBlobs(IplImage *mask,	int minArea = 1, int maxArea = 3072000, bool convexHull=false);//draw trackedBlobs only
-
+void vFindBlobs(cv::Mat& src, std::vector<vBlob>& blobs, std::vector<std::vector<vDefect>>& defects, int minArea=1, int maxArea=3072000);
 void vFindBlobs(IplImage *src, std::vector<vBlob>& blobs, std::vector<std::vector<vDefect>>& defects, int minArea=1, int maxArea=3072000);
 
 

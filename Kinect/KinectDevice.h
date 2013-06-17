@@ -23,7 +23,7 @@ PlayerIdx 0/1/2/3/4/5
 #include <windows.h>
 #include <objbase.h>
 #include <MMSystem.h>
-#include "NuiApi.h"
+#include "./sdk/NuiApi.h"
 #include <opencv2/opencv.hpp>
 
 #define K_MSG(str) ::MessageBox(NULL, TEXT(str), TEXT("Kinect App"), MB_OK | MB_ICONHAND)

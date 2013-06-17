@@ -143,6 +143,10 @@ void vFindBlobs(IplImage *src, int minArea, int maxArea, bool convexHull)
 	cvEndFindContours( &scanner );
 }
 
+void vFindBlobs( cv::Mat& src, vector<vBlob>& blobs, vector<vector<vDefect>>& defects, int minArea/*=1*/, int maxArea/*=3072000*/ )
+{
+    vFindBlobs(&(IplImage)src, blobs, defects, minArea, maxArea);
+}
 
 void vFindBlobs( IplImage *src, vector<vBlob>& blobs, vector<vector<vDefect>>& defects, int minArea/*=1*/, int maxArea/*=3072000*/)
 {
