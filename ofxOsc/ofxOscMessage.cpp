@@ -75,7 +75,7 @@ string ofxOscMessage::getArgTypeName( int index ) const
 }
 
 
-int32_t ofxOscMessage::getArgAsInt32( int index ) const
+long ofxOscMessage::getArgAsInt32( int index ) const
 {
 	if ( getArgType(index) != OFXOSC_TYPE_INT32 )
 	{
@@ -152,7 +152,7 @@ set methods
 */
 
 
-void ofxOscMessage::addIntArg( int32_t argument )
+void ofxOscMessage::addIntArg( long argument )
 {
 
 	args.push_back( new ofxOscArgInt32( argument ) );

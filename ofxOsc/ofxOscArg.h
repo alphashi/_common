@@ -65,15 +65,15 @@ subclasses for each possible argument type
 
 */
 
-#if  defined _MSC_VER
-// required because MSVC isn't ANSI-C compliant
-typedef long int32_t;
-#endif
+//#if  defined _MSC_VER
+//// required because MSVC isn't ANSI-C compliant
+//typedef long long;
+//#endif
 
 class ofxOscArgInt32 : public ofxOscArg
 {
 public:
-	ofxOscArgInt32( int32_t _value ) { value = _value; }
+	ofxOscArgInt32( long _value ) { value = _value; }
 	~ofxOscArgInt32() {};
 
 	/// return the type of this argument
@@ -81,12 +81,12 @@ public:
 	string getTypeName() { return "int32"; }
 
 	/// return value
-	int32_t get() const { return value; }
+	long get() const { return value; }
 	/// set value
-	void set( int32_t _value ) { value = _value; }
+	void set( long _value ) { value = _value; }
 
 private:
-	int32_t value;
+	long value;
 };
 
 class ofxOscArgFloat : public ofxOscArg
