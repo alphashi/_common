@@ -3,30 +3,30 @@
 
 #ifdef WIN32
 #include <windows.h>
+#pragma comment(lib,"winmm.lib")
 #else
 #include <sys/time.h>
 #endif
- 
-//uncomment this if u have "FloWrite.h"
-//#define USING_FLO_WRITE
 
-#ifdef USING_FLO_WRITE
-#include "FloWrite.h"
+//uncomment this if u have "MiniLog.h"
+//#define USING_MINI_LOG
+
+#ifdef USING_MINI_LOG
+#include "MiniLog.h"
 #else
 #include <stdio.h>
-#define FloWrite(str) 
+#define MiniLog(str) printf(str)
 #endif
-
-#pragma comment(lib,"winmm.lib")
 
 class MiniTimer
 {
 public:
-	MiniTimer()
-	{
-		resetStartTime();
-	}
-    
+    MiniTimer(bool log_enabled = true)
+    {
+        enableLog(log_enabled);
+        resetStartTime();
+    }
+
     static unsigned int getGlobalTime()
     {
 #ifdef WIN32
@@ -35,39 +35,44 @@ public:
         timeval tv;
         gettimeofday(&tv, 0 );
         return tv.tv_usec;
-
 #endif
     }
-	unsigned int getTimeElapsedMS()//mil-seconds
-	{
-		return getGlobalTime() - _start_time;
-	}
-	void resetStartTime()
-	{
-		_start_time = getGlobalTime();
-	}
-	float getTimeElapsed()//seconds
-	{
-		return 0.001f*(getGlobalTime() - _start_time);
-	}
 
-	void profileFunction(char* funcName)
-	{
-#ifdef USING_FLO_WRITE
-		FloWrite("%s[%s] : %d ms\n", getProperBlank(), funcName, getTimeElapsedMS());
-#else
-		printf("%s[%s] : %d ms\n", getProperBlank(), funcName, getTimeElapsedMS());	
-#endif
-		resetStartTime();
-	}
+    unsigned int getTimeElapsedMS()//mil-seconds
+    {
+        return getGlobalTime() - _start_time;
+    }
 
-	static char* getProperBlank()
-	{
-		return "--";
-	}
+    void resetStartTime()
+    {
+        _start_time = getGlobalTime();
+    }
+
+    float getTimeElapsed()//seconds
+    {
+        return 0.001f*(getGlobalTime() - _start_time);
+    }
+
+    void profileFunction(char* funcName)
+    {
+        if (_log_enabled)
+            MiniLog("%s[%s] : %d ms\n", getProperBlank(), funcName, getTimeElapsedMS());
+        resetStartTime();
+    }
+
+    static char* getProperBlank()
+    {
+        return "--";
+    }
 
 private:
-	unsigned int _start_time;
+    void enableLog(bool enable)
+    {
+        _log_enabled = enable;
+    }
+
+    unsigned int _start_time;
+    bool _log_enabled;
 };
 
-#endif
+#endif	//_MINI_TIMER_H_
